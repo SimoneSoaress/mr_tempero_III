@@ -16,6 +16,14 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('index') }}">Anúncios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('list_categories') }}">Categorias</a>
+            </li>
+          </ul>
           <ul class="navbar-nav ms-auto">
             {% if current_user.is_anonymous %}
             <li class="nav-item">
@@ -25,11 +33,18 @@
               <a class="nav-link" href="{{ url_for('register') }}">Registar</a>
             </li>
             {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="#">Olá, {{ current_user.username }}!</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('logout') }}">Sair</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Olá, {{ current_user.username }}!
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="{{ url_for('my_announcements') }}">Meus Anúncios</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('my_purchases') }}">Minhas Compras</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('my_sales') }}">Minhas Vendas</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('my_favorites') }}">Meus Favoritos</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{{ url_for('logout') }}">Sair</a></li>
+              </ul>
             </li>
             {% endif %}
           </ul>
@@ -51,6 +66,10 @@
       
       {% block content %}{% endblock %}
     </main>
+
+    <footer class="container mt-5 text-center text-muted">
+        <p>&copy; 2025 Mr. Temperos III</p>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>

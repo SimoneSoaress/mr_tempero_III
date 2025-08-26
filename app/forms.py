@@ -1,8 +1,7 @@
-# Define os formulários web usando Flask-WTF.
-
+# app/forms.py
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, FloatField
-from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, FloatField, SelectField
+from wtforms.validators import DataRequired, Email, EqualTo, ValidationError, Length
 from app.models import User
 
 class LoginForm(FlaskForm):
@@ -29,8 +28,21 @@ class RegistrationForm(FlaskForm):
         if user is not None:
             raise ValidationError('Este email já está a ser utilizado.')
 
-class ProductForm(FlaskForm):
-    name = StringField('Nome do Produto', validators=[DataRequired()])
+class AnnouncementForm(FlaskForm):
+    title = StringField('Título do Anúncio', validators=[DataRequired(), Length(min=5, max=140)])
     description = TextAreaField('Descrição', validators=[DataRequired()])
     price = FloatField('Preço', validators=[DataRequired()])
-    submit = SubmitField('Salvar')
+    category_id = SelectField('Categoria', coerce=int, validators=[DataRequired()])
+    submit = SubmitField('Publicar Anúncio')
+
+class CategoryForm(FlaskForm):
+    name = StringField('Nome da Categoria', validators=[DataRequired(), Length(min=3, max=100)])
+    submit = SubmitField('Salvar Categoria')
+
+class QuestionForm(FlaskForm):
+    body = TextAreaField('A sua pergunta', validators=[DataRequired(), Length(min=10, max=500)])
+    submit = SubmitField('Enviar Pergunta')
+    
+class AnswerForm(FlaskForm):
+    answer = TextAreaField('A sua resposta', validators=[DataRequired(), Length(min=10, max=500)])
+    submit = SubmitField('Enviar Resposta')

@@ -1,0 +1,21 @@
+<!-- app/templates/category_form.html -->
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>{{ title }}</h2>
+    <div class="card">
+        <div class="card-body">
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.name.label(class="form-label") }}
+                    {{ form.name(class="form-control") }}
+                </div>
+                <div>
+                    {{ form.submit(class="btn btn-success") }}
+                    <a href="{{ url_for('list_categories') }}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
