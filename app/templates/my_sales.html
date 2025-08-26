@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Minhas Vendas</h1>
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Anúncio</th>
+                        <th>Comprador</th>
+                        <th>Data da Venda</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sale in sales %}
+                    <tr>
+                        <td><a href="{{ url_for('announcement_detail', id=sale.announcement.id) }}">{{ sale.announcement.title }}</a></td>
+                        <td>{{ sale.buyer.username }}</td>
+                        <td>{{ sale.timestamp.strftime('%d/%m/%Y') }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="3" class="text-center">Você ainda não fez nenhuma venda.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

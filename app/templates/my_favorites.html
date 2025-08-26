@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Meus Favoritos</h1>
+    {% with announcements=favorites %}
+        {% include '_announcement_list.html' %}
+    {% endwith %}
+{% endblock %}

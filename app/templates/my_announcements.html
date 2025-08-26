@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Meus Anúncios</h1>
+    {% with announcements=announcements %}
+        {% include '_announcement_list.html' %}
+    {% endwith %}
+{% endblock %}

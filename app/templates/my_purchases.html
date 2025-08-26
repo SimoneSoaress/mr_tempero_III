@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Minhas Compras</h1>
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Anúncio</th>
+                        <th>Vendedor</th>
+                        <th>Data da Compra</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for purchase in purchases %}
+                    <tr>
+                        <td><a href="{{ url_for('announcement_detail', id=purchase.announcement.id) }}">{{ purchase.announcement.title }}</a></td>
+                        <td>{{ purchase.announcement.author.username }}</td>
+                        <td>{{ purchase.timestamp.strftime('%d/%m/%Y') }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="3" class="text-center">Você ainda não fez nenhuma compra.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

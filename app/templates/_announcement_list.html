@@ -1,0 +1,22 @@
+<div class="row">
+    {% for announcement in announcements %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ announcement.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">R$ {{ "%.2f"|format(announcement.price) }}</h6>
+                <div class="mt-auto">
+                    <a href="{{ url_for('announcement_detail', id=announcement.id) }}" class="btn btn-sm btn-outline-secondary">Ver Detalhes</a>
+                </div>
+            </div>
+             <div class="card-footer text-muted">
+                Por {{ announcement.author.username }}
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col">
+        <div class="alert alert-info">Nenhum item encontrado.</div>
+    </div>
+    {% endfor %}
+</div>

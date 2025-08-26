@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h1 class="card-title">{{ announcement.title }}</h1>
+                        <h4 class="text-success">R$ {{ "%.2f"|format(announcement.price) }}</h4>
+                    </div>
+                    <div>
+                        {% if current_user.is_authenticated %}
+                            {% if current_user.is_favorited(announcement) %}
+                                <a href="{{ url_for('remove_favorite', id=announcement.id) }}" class="btn btn-warning"><i class="bi bi-star-fill"></i> Remover dos Favoritos</a>
+                            {% else %}
+                                <a href="{{ url_for('add_favorite', id=announcement.id) }}" class="btn btn-outline-warning"><i class="bi bi-star"></i> Adicionar aos Favoritos</a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                <hr>
+                <p class="card-text">{{ announcement.description }}</p>
+            </div>
+            <div class="card-footer text-muted">
+                Vendido por: {{ announcement.author.username }} | Categoria: {{ announcement.category.name }}
+            </div>
+        </div>
+
+        <!-- Secção de Perguntas e Respostas -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h4>Perguntas e Respostas</h4>
+            </div>
+            <div class="card-body">
+                {% for question in announcement.questions.all() %}
+                    <div class="mb-3">
+                        <p><strong>{{ question.asker.username }} perguntou:</strong> {{ question.body }}</p>
+                        {% if question.answer %}
+                            <p class="ms-4 text-muted"><strong>{{ announcement.author.username }} respondeu:</strong> {{ question.answer }}</p>
+                        {% elif current_user == announcement.author %}
+                            <form action="{{ url_for('answer_question', id=question.id) }}" method="post" class="ms-4">
+                                {{ answer_form.hidden_tag() }}
+                                {{ answer_form.answer(class="form-control mb-2", rows=2) }}
+                                {{ answer_form.submit(class="btn btn-sm btn-primary") }}
+                            </form>
+                        {% endif %}
+                    </div>
+                    <hr>
+                {% else %}
+                    <p>Nenhuma pergunta foi feita ainda. Seja o primeiro!</p>
+                {% endfor %}
+                
+                {% if current_user.is_authenticated and current_user != announcement.author %}
+                <hr>
+                <h5>Faça a sua pergunta</h5>
+                <form action="{{ url_for('ask_question', id=announcement.id) }}" method="post">
+                    {{ question_form.hidden_tag() }}
+                    <div class="mb-3">
+                        {{ question_form.body(class="form-control", rows=3) }}
+                    </div>
+                    {{ question_form.submit(class="btn btn-success") }}
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Ações</h5>
+                {% if announcement.purchase %}
+                    <div class="alert alert-danger">Este item já foi vendido.</div>
+                {% elif current_user.is_authenticated %}
+                    {% if current_user == announcement.author %}
+                        <a href="{{ url_for('edit_announcement', id=announcement.id) }}" class="btn btn-warning w-100 mb-2">Editar Anúncio</a>
+                        <form action="{{ url_for('delete_announcement', id=announcement.id) }}" method="post" onsubmit="return confirm('Tem a certeza?');">
+                            <button type="submit" class="btn btn-danger w-100">Excluir Anúncio</button>
+                        </form>
+                    {% else %}
+                        <form action="{{ url_for('buy_announcement', id=announcement.id) }}" method="post">
+                             <button type="submit" class="btn btn-success w-100">Comprar Agora</button>
+                        </form>
+                    {% endif %}
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="btn btn-primary w-100">Faça o login para comprar</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

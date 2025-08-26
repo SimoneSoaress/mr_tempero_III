@@ -5,13 +5,13 @@ from wtforms.validators import DataRequired, Email, EqualTo, ValidationError, Le
 from app.models import User
 
 class LoginForm(FlaskForm):
-    username = StringField('Nome de Utilizador', validators=[DataRequired()])
+    username = StringField('Nome de Usuário', validators=[DataRequired()])
     password = PasswordField('Senha', validators=[DataRequired()])
     remember_me = BooleanField('Lembrar-me')
     submit = SubmitField('Entrar')
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Nome de Utilizador', validators=[DataRequired()])
+    username = StringField('Nome de Usuário', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Senha', validators=[DataRequired()])
     password2 = PasswordField(
@@ -21,12 +21,12 @@ class RegistrationForm(FlaskForm):
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user is not None:
-            raise ValidationError('Este nome de utilizador já existe.')
+            raise ValidationError('Este nome de usuário já existe.')
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
-            raise ValidationError('Este email já está a ser utilizado.')
+            raise ValidationError('Este email já está sendo utilizado.')
 
 class AnnouncementForm(FlaskForm):
     title = StringField('Título do Anúncio', validators=[DataRequired(), Length(min=5, max=140)])
