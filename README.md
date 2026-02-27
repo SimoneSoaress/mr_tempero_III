@@ -1,46 +1,60 @@
-Desenvolvimento e implantação web "Mr. Temperos III", um sistema de e-commerce para compra e venda de produtos, conforme os requisitos e critérios solicitados. 
+# 🌿 Mr. Temperos 🛒
 
-Para garantir a segurança e a integridade dos dados, implementei um sistema de autenticação utilizando a biblioteca Flask-Login. 
-As seguintes páginas e funcionalidades são acessíveis somente após o usuário realizar o login: 
+Sistema de e-commerce completo para compra e venda de produtos, desenvolvido como parte da disciplina de **Frameworks para Desenvolvimento de Software (4º Termo-TOLEDO)**.
 
-Página Principal (/index): Embora a página principal seja visível, as ações de gestão só estão disponíveis para utilizadores autenticados. 
+## 🚀 Sobre o Projeto
+A empresa **Mr. Temperos** é uma plataforma focada na segurança e experiência do usuário, permitindo a gestão completa de anúncios, interação entre compradores e vendedores, e controle de favoritos.
 
-Criação de Anúncios (/anúncio/novo): Apenas usuários logados podem criar anúncios de produtos. 
+</br>
 
-Edição de Anúncios (/anúncio/editar/<id>): Usuário só pode editar os anúncios que ele próprio criou. 
+## 🛠️ Tecnologias do Projeto MR Temperos
 
-Exclusão de Anúncios (/anúncio/deletar/<id>): Usuário só pode excluir os seus próprios anúncios. 
+</br>
 
-Realizar Perguntas (/anúncio/<id>/perguntar): Apenas usuários logados podem fazer perguntas nos anúncios de outros. 
+| Python | Flask | Bootstrap | SQLite | HTML5 | CSS3 |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="45"> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" width="45"> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" width="45"> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" width="45"> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="45"> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="45"> |
+</br>
 
-Responder a Perguntas (/pergunta/<id>/responder): Apenas o proprietário do anúncio pode responder às perguntas feitas no anúncio. 
+## 🔐 Funcionalidades e Controle de Acesso
+<img align="right" width="390px"  src="https://raw.githubusercontent.com/SimoneSoaress/SimoneSoaress/main/SimoneCorpoInteiro.png">
 
-Comprar um Anúncio (/anúncio/<id>/comprar): A funcionalidade de compra está restrita a usuários autenticados. 
+> ### 🟢 ACESSO LIVRE (Público)
+> *   **Vitrine Dinâmica:** Visualização de todos os produtos anunciados.
+> *   **Busca de Itens:** Localização rápida de temperos e condimentos.
 
+> ### 🔴 ACESSO RESTRITO (`@login_required`)
+> *   **📦 Meus Anúncios:** Painel completo para criar e gerenciar suas vendas.
+> *   **💬 Central de Dúvidas:** Sistema de Q&A (Perguntas e Respostas) nativo.
+> *   **🛒 Processo de Compra:** Fluxo simplificado de pedidos e checkout.
+> *   **⭐ Favoritos:** Salve os itens de interesse para consulta rápida.
+> *   **📊 Histórico:** Relatórios detalhados de compras e vendas realizadas.
 
-FRAMEWORKS PARA DESENVOLVIMENTO DE SOFTWARE | 4º termo 
+</br>
 
-Adicionar/Remover Favoritos (/favoritar/<id> e desfavoritar/<id>): Apenas usuários logados podem gerir a sua lista de favoritos. 
+## 🎨 Interface e Design
+A aplicação utiliza **Bootstrap** para garantir uma experiência responsiva e intuitiva:
+- **Menus:** Navegação fluida e adaptável a dispositivos móveis.
+- **Formulários:** Estilizados para uma melhor experiência de preenchimento.
+- **Visualização de Dados:** Uso de tabelas e cartões (cards) para organizar listas de produtos de forma clara.
 
-Páginas de Relatórios Pessoais: Todas as páginas que exibem dados específicos do utilizador exigem login, segue as páginas:
-/meus_anuncios 
-/minhas_compras 
-/minhas_vendas 
-/meus_favoritos 
+---
 
-Justificativa: Conforme as boas práticas de segurança apresentadas em aulas, o controle de acesso é fundamental em qualquer aplicação que manipule dados de usuários. 
-O uso do decorador @login_required do Flask-Login em cada rota, garante que nenhuma ação de modificação de dados possa ser executada por um usuário anônimo, protegendo a 
-aplicação contra acessos não autorizados. 
+<div align="center">
+  <table border="0">
+    <tr>
+      <td>
+        <img src="https://raw.githubusercontent.com/SimoneSoaress/Estrutura_de_Dados/main/avatarAssinado.png" width="45" height="45" style="border-radius:50%">
+      </td>
+      <td>
+        <font size="5">Desenvolvido por <b>Simone Mayara Soares</b></font>
+      </td>
+    </tr>
+  </table>
 
-
-• Atualização da Aparência com Bootstrap 
-Na interface da aplicação eu utilizei o framework Bootstrap, uma aparência organizada e responsiva. 
-
-Menus: Foi implementada uma barra de navegação responsiva que se adapta a diferentes tamanhos de ecrã. 
-
-Formulários: eles foram estilizados com as classes do Bootstrap, proporcionando uma experiência bonita e fácil. 
-
-Tabelas e Listas: As listas de produtos, compras e vendas são apresentadas em tabelas e cartões, tornando a visualização dos dados clara e organizada. 
-
-Justificativa: conforme foi discutido em aula, o uso do Bootstrap acelera o desenvolvimento e garante a consistência visual resolvendo problemas de 
-responsividade, de forma padronizada e eficiente. 
+  <p align="center">
+    <a href="https://www.linkedin.com/in/mayaradsoaress/" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+    &nbsp;
+    <a href="https://github.com/SimoneSoaress" target="_blank"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
+  </p>
+</div>
